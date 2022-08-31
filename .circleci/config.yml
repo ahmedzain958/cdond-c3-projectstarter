@@ -153,7 +153,7 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_cli
@@ -188,7 +188,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       - destroy-environment
-      
+
       # Here's where you will add some code to rollback on failure    
 #   configure-infrastructure:
 #     docker:
