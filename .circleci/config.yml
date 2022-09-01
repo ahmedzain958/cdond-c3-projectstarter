@@ -187,7 +187,8 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      - destroy-environment
+
+      - destroy-environment # rollback our infra when error tp
 
       # Here's where you will add some code to rollback on failure    
   configure-infrastructure:
