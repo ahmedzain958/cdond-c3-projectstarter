@@ -20,7 +20,16 @@ commands:
             sudo apt install software-properties-common
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt install ansible
-
+  # install_nodejs: #improv.
+  #   description: install Node.js 13
+  #   steps:
+  #     - run:
+  #         name: install ansible v2
+  #         command: |
+  #           sudo apt update
+  #           sudo apt install software-properties-common
+  #           sudo add-apt-repository --yes --update ppa:ansible/ansible
+  #           sudo apt install ansible
   destroy-environment:
     description: Destroy back-end and fron-end cloudformation stacks given a workflow ID.
     parameters:
@@ -181,12 +190,12 @@ jobs:
               --filters "Name=tag:Name, Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
-            echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
-            cat .circleci/ansible/inventory.txt  
+            echo $BACKEND_PUBLIC_IP >> ~/inventory.txt
+            cat ~/inventory.txt  
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - /inventory.txt
 
       - destroy-environment # rollback our infra when error tp
 
