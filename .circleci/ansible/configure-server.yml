@@ -1,5 +1,7 @@
 ---
-
+# all here are configs used for chunks of actions placed in roles:
+   # - configure-server
+   #- configure-prometheus-node-exporter
 - name: "configuration play." 
   hosts: web
   remote_user: ubuntu
