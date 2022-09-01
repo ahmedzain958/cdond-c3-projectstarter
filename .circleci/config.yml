@@ -201,6 +201,7 @@ jobs:
       - destroy-environment # rollback our infra when error tp
 
       # Here's where you will add some code to rollback on failure    
+
   configure-infrastructure:
     docker:
       - image: cimg/base:stable
@@ -214,7 +215,6 @@ jobs:
           at: ~/
       - run:
           name: Configure server
-          working_directory: .circleci/ansible/
           command: |
             cd .circleci/ansible
             cat inventory.txt
