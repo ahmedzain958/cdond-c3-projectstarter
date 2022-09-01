@@ -12,7 +12,6 @@
     update_cache: yes
 
 - name: "Install PM2 Globally"
-  apt: 
-    npm: 
-      name: pm2
-      global: yes
+  npm: 
+    name: pm2
+    global: yes
