@@ -384,7 +384,7 @@ jobs:
               --stack-name initialStack
       # Here's where you will add some code to rollback on failure  
 
-cleanup:
+  cleanup:
     docker:
       - image: cimg/base:stable
     steps:
@@ -408,7 +408,7 @@ cleanup:
               aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
               aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
             fi
-            
+
 workflows:
   default:
     jobs:
