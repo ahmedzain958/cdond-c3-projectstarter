@@ -225,7 +225,9 @@ jobs:
 
       - destroy-environment
       # Here's where you will add some code to rollback on failure      
-
+      #npm cache clean --force
+      #rm -rf node_modules
+      #rm -rf package-lock.json
   run-migrations:
     docker:
       - image: cimg/base:stable
@@ -237,9 +239,6 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm cache clean --force
-            rm -rf node_modules
-            rm -rf package-lock.json
             npm install
             npm run migrations > migrations_dump.txt
       - run:
