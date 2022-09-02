@@ -44,8 +44,7 @@ commands:
           when : on_fail
           command: |
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.Workflow_ID >>
-            aws s3 rm "s3:udapeople-<< parameters.Workflow_ID >> --recursive
-            # aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
+            aws s3 rm "s3:udapeople-<< parameters.Workflow_ID >>" --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >>            
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -59,7 +58,7 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS = $(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
+            SUCCESS =$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
             if(( $SUCCESS==1 )); 
             then
              cd ~/project/backend
@@ -229,6 +228,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - install_nodejs
       - install_cli
       - run:
           name: Run migrations
@@ -426,7 +426,7 @@ workflows:
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
             branches:
-              only: [master]
+              only: [master] #test-dev-branch
       - configure-infrastructure:
           requires: [deploy-infrastructure]
       - run-migrations:
