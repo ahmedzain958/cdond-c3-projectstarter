@@ -342,14 +342,14 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             
-            export API_URL=http://${BACKEND_PUBLIC_IP}::3030
+            export API_URL=http://${BACKEND_PUBLIC_IP}:3030
             echo "${API_URL}"
             echo "${BACKEND_PUBLIC_IP}"
             if curl -s $API_URL/api/status | grep "ok"
             then
-              return 0
+              exit 0
             else
-              return 1
+              exit 1
             fi
       - run:
           name: FrontEnd smoke test
