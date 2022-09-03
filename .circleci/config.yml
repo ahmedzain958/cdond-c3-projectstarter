@@ -230,7 +230,7 @@ jobs:
       #rm -rf package-lock.json
   run-migrations:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:13.8.0
     steps:
       - checkout
       - install_nodejs
@@ -254,7 +254,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:13.8.0
     steps:
       - checkout
       - install_cli
@@ -288,7 +288,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:13.8.0
     steps:
       - checkout
       - install_cli
@@ -329,7 +329,7 @@ jobs:
       - revert-migrations  
   smoke-test:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:13.8.0
     steps:
       - checkout
       - install_cli
@@ -343,11 +343,13 @@ jobs:
               --output text)
             
             export API_URL=http://${BACKEND_PUBLIC_IP}::3030
+            echo "${API_URL}"
+            echo "${BACKEND_PUBLIC_IP}"
             if curl -s $API_URL/api/status | grep "ok"
             then
-              exit 0
+              return 0
             else
-              exit 1
+              return 1
             fi
       - run:
           name: FrontEnd smoke test
