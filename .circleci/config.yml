@@ -288,7 +288,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_cli
@@ -329,7 +329,7 @@ jobs:
       - revert-migrations  
   smoke-test:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_cli
