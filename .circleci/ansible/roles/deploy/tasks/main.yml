@@ -9,10 +9,10 @@
     src: artifact.tar.gz
     dest: ~/backend-app
 #-----------------
-- name: "Add nodejs apt key"
-  apt_key:
-    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-    state: present
+# - name: "Add nodejs apt key"
+#   apt_key:
+#     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+#     state: present
 
 - name: "Install nodejs with cache"
   apt:
