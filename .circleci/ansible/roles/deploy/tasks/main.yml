@@ -8,26 +8,6 @@
   unarchive:
     src: artifact.tar.gz
     dest: ~/backend-app
-#-----------------
-# - name: "Add nodejs apt key"
-#   apt_key:
-#     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-#     state: present
-
-- name: "Install nodejs with cache"
-  apt:
-    update_cache: yes
-    name: nodejs
-    state: present
-
-
-- name: "install PM2 for production "
-  npm:
-    name: pm2
-    global: yes
-    state: present
-    production: yes
-#-----------------
 
 - name: "Installing Node Dependencies"
   shell: |
