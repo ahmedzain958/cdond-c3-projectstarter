@@ -3,23 +3,48 @@
   file:
     path: ~/backend-app
     state: directory
+
 - name: "Unarchive backend files"
   unarchive:
     src: artifact.tar.gz
     dest: ~/backend-app
+#-----------------
+- name: "Add nodejs apt key"
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
+
+- name: "Install nodejs with cache"
+  apt:
+    update_cache: yes
+    name: nodejs
+    state: present
+
+
+- name: "install PM2 for production "
+  npm:
+    name: pm2
+    global: yes
+    state: present
+    production: yes
+#-----------------
+
 - name: "Installing Node Dependencies"
   shell: |
     cd ~/backend-app
     npm i
+
 - name: "Executing Node app with PM2"
   shell: |
     cd ~/backend-app/dist
     pm2 stop default
-    pm2 start main.js#
+    pm2 start main.js
   register: execute_node
+
 - name: "print message"
   debug:
     msg: "{{ execute_node.stdout_lines }}"
+
 - name: "Configure pm2 to start as service"
   shell: |
     sudo su -c "env PATH=$PATH:/usr/local/bin pm2 sartup systemd -u ubuntu --hp /home/ubuntu"

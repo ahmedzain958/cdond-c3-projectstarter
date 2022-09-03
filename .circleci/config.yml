@@ -21,10 +21,10 @@ commands:
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt install ansible -y
   install_nodejs: #improv.
-    description: install Node.js 13
+    description: install Node.js
     steps:
       - run:
-          name: install Node.js 13
+          name: install Node.js
           command: |
             curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             sudo apt install -y nodejs
@@ -284,8 +284,7 @@ jobs:
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - destroy-environment
       - revert-migrations
-
-                    
+           
   deploy-backend:
     docker:
       - image: cimg/base:stable
@@ -363,8 +362,8 @@ jobs:
             else
               return 1
             fi
-      - destroy-environment
-      - revert-migrations
+      # - destroy-environment
+      # - revert-migrations
       # Here's where you will add some code to rollback on failure  
 
   cloudfront-update:
