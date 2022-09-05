@@ -335,7 +335,7 @@ jobs:
           name: Install dependencies command
           command: |
             apk add curl 
-            apk add --update nodejs 
+            apk add --update nodejs npm
             npm pip3 install awscli 
       - run:
           name: Backend smoke test
