@@ -336,7 +336,7 @@ jobs:
           command: |
             apk add curl 
             apk add --update nodejs npm
-            npm pip3 install awscli 
+            pip3 install awscli 
       - run:
           name: Backend smoke test
           command: |
@@ -366,8 +366,8 @@ jobs:
             else
               return 1
             fi
-      # - destroy-environment
-      # - revert-migrations
+      - destroy-environment
+      - revert-migrations
       # Here's where you will add some code to rollback on failure  
 
   cloudfront-update:
