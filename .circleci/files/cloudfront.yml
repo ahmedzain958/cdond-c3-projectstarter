@@ -9,20 +9,20 @@ Parameters:
 
 Resources:
   
-  CloudFrontOriginAccessIdentity:
+  CloudFrontOriginAccessIdentity: # old CloudFrontOriginAccessIdentity
     Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
     Properties:
       CloudFrontOriginAccessIdentityConfig:
         Comment: Origin Access Identity for Serverless Static Website
 
-  WebpageCDN:
+  WebpageCDN: #switches from blue to green
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
-        Origins:
+        Origins: # changing the cloudfront from 1 s3-bucket to another s3-bucket
           - DomainName: !Sub "udapeople-${WorkflowID}.s3.amazonaws.com"
             Id: webpage
-            S3OriginConfig:
+            S3OriginConfig: # new CloudFrontOriginAccessIdentity
               OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}"
         Enabled: True
         DefaultRootObject: index.html

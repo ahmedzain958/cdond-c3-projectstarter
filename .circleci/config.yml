@@ -72,7 +72,7 @@ commands:
 jobs:
   build-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -89,7 +89,7 @@ jobs:
 
   build-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -106,7 +106,7 @@ jobs:
 
   test-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -121,7 +121,7 @@ jobs:
                 
   test-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -135,7 +135,7 @@ jobs:
             
   scan-frontend: # against vulnerabilities
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -145,12 +145,12 @@ jobs:
           command: |
             cd frontend
             npm install
-            npm audit fix --force --audit-level=critical
+            npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
 
   scan-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -160,13 +160,13 @@ jobs:
           command: |
             cd backend
             npm install
-            npm audit fix --force --audit-level=critical
-            npm audit fix --force --audit-level=critical
+            npm audit fix --audit-level=critical --force
+            npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
-      - image: cimg/base:stable
+      - image: amazon/aws-cli #cimg/base:stable
     steps:
       - checkout
       - install_cli
@@ -230,7 +230,7 @@ jobs:
       #rm -rf package-lock.json
   run-migrations:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - install_nodejs
@@ -254,7 +254,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - install_cli
