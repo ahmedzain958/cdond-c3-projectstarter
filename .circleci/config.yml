@@ -328,11 +328,15 @@ jobs:
       - revert-migrations  
   smoke-test:
     docker:
-      - image: cimg/base:stable
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
-      - install_cli
-      - install_nodejs
+      - run: 
+          name: Install dependencies command
+          command: |
+            apk add curl 
+            apk add --update nodejs 
+            npm pip3 install awscli 
       - run:
           name: Backend smoke test
           command: |
@@ -362,8 +366,8 @@ jobs:
             else
               return 1
             fi
-      - destroy-environment
-      - revert-migrations
+      # - destroy-environment
+      # - revert-migrations
       # Here's where you will add some code to rollback on failure  
 
   cloudfront-update:
