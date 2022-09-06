@@ -232,9 +232,9 @@ jobs:
       - checkout
       - install_cli
       - restore_cache:
-        keys: [backend-dependencies-ck]
+          keys: [backend-dependencies-ck]
       - attach_workspace:
-        at: ~/ 
+          at: ~/ 
       - run:
           name: Run migrations
           command: |
