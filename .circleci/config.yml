@@ -290,9 +290,7 @@ jobs:
     docker:
       - image: python:3.7-alpine3.11
     steps:
-      # Checkout code from git
       - checkout
-      # Add ssh keys with fingerprint
       - add_ssh_keys:
           fingerprints: ["3a:ac:7e:58:7d:53:2e:b4:b0:5a:65:2d:3a:9a:43:f8"]
       # attach workspace
@@ -333,7 +331,7 @@ jobs:
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment
       - revert-migrations  
-      
+
   smoke-test:
     docker:
       - image: cimg/base:stable
