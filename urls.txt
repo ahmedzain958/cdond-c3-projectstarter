@@ -1,2 +1,2 @@
 URL01: https://github.com/ahmedzain958/cdond-c3-projectstarter
-URL02: arn:aws:s3:::udapeople-36d03ca
+URL02: arn:aws:s3:::udapeople-ced663d
